@@ -1,0 +1,6 @@
+node_modules/
+dist/
+tranquility.db
+tranquility.db-journal
+.env
+.DS_Store
