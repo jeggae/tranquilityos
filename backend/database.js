@@ -27,6 +27,8 @@ export const initDb = () => {
         last_name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password_hash TEXT NOT NULL,
+        reset_token TEXT,
+        reset_expires DATETIME,
         role TEXT DEFAULT 'owner',
         business_id INTEGER,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP

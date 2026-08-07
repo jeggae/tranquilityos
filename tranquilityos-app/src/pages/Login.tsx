@@ -72,7 +72,7 @@ const Login = () => {
           <div className="input-group">
             <div className="flex justify-between items-center">
               <label className="input-label">Password</label>
-              <a href="#" className="text-xs text-accent-primary">Forgot password?</a>
+              <Link to="/forgot-password" className="text-xs text-accent-primary">Forgot password?</Link>
             </div>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
