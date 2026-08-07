@@ -9,6 +9,7 @@ import QuotationBuilder from './pages/QuotationBuilder';
 import Jobs from './pages/Jobs';
 import Invoices from './pages/Invoices';
 import InvoiceBuilder from './pages/InvoiceBuilder';
+import Settings from './pages/Settings';
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const token = localStorage.getItem('token');
@@ -30,6 +31,7 @@ function App() {
         <Route path="/jobs" element={<PrivateRoute><Jobs /></PrivateRoute>} />
         <Route path="/invoices" element={<PrivateRoute><Invoices /></PrivateRoute>} />
         <Route path="/invoices/new" element={<PrivateRoute><InvoiceBuilder /></PrivateRoute>} />
+        <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
       </Routes>
     </Router>
   );

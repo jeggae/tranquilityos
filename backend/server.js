@@ -9,6 +9,7 @@ import customersRoutes from './customers.js';
 import quotationsRoutes from './quotations.js';
 import jobsRoutes from './jobs.js';
 import invoicesRoutes from './invoices.js';
+import settingsRoutes from './settings.js';
 import { initDb } from './database.js';
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use('/api/customers', customersRoutes);
 app.use('/api/quotations', quotationsRoutes);
 app.use('/api/jobs', jobsRoutes);
 app.use('/api/invoices', invoicesRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Basic health check route
 app.get('/api/health', (req, res) => {

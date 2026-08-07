@@ -67,8 +67,9 @@ const Customers = () => {
       {/* Shared Sidebar */}
       <div className="w-64 glass-panel border-y-0 border-l-0 rounded-none h-screen p-6 flex flex-col fixed z-20 bg-bg-primary/95">
         <div className="flex items-center gap-3 mb-10">
-          <div className="w-8 h-8 rounded-md bg-gradient-to-br from-blue-500 to-cyan-400 flex-center">
-            <span className="text-white font-bold">T</span>
+          <div className="w-8 h-8 rounded-md bg-gradient-to-br from-blue-500 to-cyan-400 flex-center overflow-hidden relative">
+            <img src="/logo.png" alt="Core" className="w-full h-full object-cover z-10" onError={(e) => e.currentTarget.style.display='none'} />
+            <span className="text-white font-bold absolute z-0">T</span>
           </div>
           <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
             TranquilityOS
@@ -100,7 +101,7 @@ const Customers = () => {
             <CreditCard size={20} />
             <span>Invoices</span>
           </a>
-          <a href="#" className="flex items-center gap-3 px-3 py-2.5 text-text-secondary hover:text-text-primary hover:bg-white/5 rounded-lg transition-all">
+          <a href="/settings" className="flex items-center gap-3 px-3 py-2.5 text-text-secondary hover:text-text-primary hover:bg-white/5 rounded-lg transition-all">
             <Settings size={20} />
             <span>Settings</span>
           </a>

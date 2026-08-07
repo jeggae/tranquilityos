@@ -40,6 +40,7 @@ export const initDb = () => {
         industry TEXT,
         currency TEXT DEFAULT 'USD',
         country TEXT,
+        logo_url TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `);

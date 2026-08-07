@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const InvoiceBuilder = () => {
   const navigate = useNavigate();
   const [customers, setCustomers] = useState<any[]>([]);
+  const [businessLogo, setBusinessLogo] = useState('');
   
   // Invoice State
   const [customerId, setCustomerId] = useState('');
@@ -23,14 +24,22 @@ const InvoiceBuilder = () => {
   const total = subtotal + taxAmount;
 
   useEffect(() => {
-    const fetchCustomers = async () => {
+    const fetchData = async () => {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/customers`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) setCustomers(await res.json());
+      const headers = { 'Authorization': `Bearer ${token}` };
+      
+      const [customersRes, settingsRes] = await Promise.all([
+        fetch(`${import.meta.env.VITE_API_URL}/api/customers`, { headers }),
+        fetch(`${import.meta.env.VITE_API_URL}/api/settings/business`, { headers })
+      ]);
+
+      if (customersRes.ok) setCustomers(await customersRes.json());
+      if (settingsRes.ok) {
+        const brand = await settingsRes.json();
+        if (brand.logo_url) setBusinessLogo(brand.logo_url);
+      }
     };
-    fetchCustomers();
+    fetchData();
   }, []);
 
   const handleAddItem = () => {
@@ -99,6 +108,7 @@ const InvoiceBuilder = () => {
 
       <div className="flex justify-between items-center mb-8">
         <div>
+          {businessLogo && <img src={businessLogo} alt="Logo" className="h-12 mb-4 object-contain" />}
           <h1 className="text-3xl font-bold text-white mb-2">Invoice Builder</h1>
           <p className="text-text-secondary">Generate exact billing orders securely.</p>
         </div>

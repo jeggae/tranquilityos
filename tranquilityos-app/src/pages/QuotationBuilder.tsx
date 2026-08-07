@@ -6,6 +6,9 @@ const QuotationBuilder = () => {
   const navigate = useNavigate();
   const [customers, setCustomers] = useState<any[]>([]);
   
+  // Branding Matrix
+  const [businessLogo, setBusinessLogo] = useState('');
+  
   // Quote State
   const [customerId, setCustomerId] = useState('');
   const [title, setTitle] = useState('');
@@ -25,10 +28,22 @@ const QuotationBuilder = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/customers`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) setCustomers(await res.json());
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/customers`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) setCustomers(await res.json());
+
+        const settingsRes = await fetch(`${import.meta.env.VITE_API_URL}/api/settings/business`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if(settingsRes.ok) {
+            const brand = await settingsRes.json();
+            if(brand.logo_url) setBusinessLogo(brand.logo_url);
+        }
+      } catch (err) {
+        console.error(err);
+      }
     };
     fetchCustomers();
   }, []);
@@ -102,6 +117,7 @@ const QuotationBuilder = () => {
 
       <div className="flex justify-between items-center mb-8">
         <div>
+          {businessLogo && <img src={businessLogo} alt="Business Branding" className="h-12 mb-4 object-contain" />}
           <h1 className="text-3xl font-bold text-white mb-2">Quotation Builder</h1>
           <p className="text-text-secondary">Draft detailed service proposals easily.</p>
         </div>
