@@ -99,7 +99,7 @@ router.post('/forgot-password', (req, res) => {
 
       const resetUrl = `http://localhost:5173/reset-password?token=${resetToken}`;
       const mailOptions = {
-        from: 'no-reply@tranquilityos.com',
+        from: process.env.SENDER_EMAIL || 'no-reply@tranquilityos.com',
         to: user.email,
         subject: 'TranquilityOS Password Reset',
         text: `You requested a password reset. Please click the following link to reset your secure password: ${resetUrl}`
