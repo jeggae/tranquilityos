@@ -11,7 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'tranquilityos_fallback_secret_key'
 // Transport configuration for emails
 const transporter = nodemailer.createTransport({
   host: 'smtp.sendgrid.net',
-  port: 587,
+  port: 2525,
   auth: {
     user: 'apikey',
     pass: process.env.SENDGRID_API_KEY || 'MISSING_API_KEY'
